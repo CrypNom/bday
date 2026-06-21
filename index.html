@@ -29,7 +29,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            padding-bottom: 80px; /* Increased padding to make room for the footer */
+            padding-bottom: 80px;
         }
 
         /* Floating Elements Background */
@@ -212,13 +212,6 @@
             text-align: center;
         }
 
-        .cute-img {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            border: 4px solid var(--secondary-pink);
-        }
-
         /* Footer Style */
         footer {
             position: absolute;
@@ -318,7 +311,6 @@
             document.getElementById(pageId).classList.add('active');
             button.classList.add('active');
             
-            // Reposition "No" button smoothly if switching pages
             if(pageId === 'page3') {
                 resetNoButton();
             }
@@ -342,7 +334,7 @@
         }
         setInterval(createHeart, 350);
 
-        // Simple Countdown logic (Counting down till the end of today)
+        // Simple Countdown logic
         function updateTimer() {
             const now = new Date();
             const endOfToday = new Date();
