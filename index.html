@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Princess! ✨🌸</title>
+    <style>
+        :root {
+            --primary-pink: #ff7597;
+            --secondary-pink: #ffb3c6;
+            --soft-bg: #fff0f3;
+            --text-color: #5c4a4c;
+            --mint-green: #c1f0db;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--soft-bg);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 80px; /* Increased padding to make room for the footer */
+        }
+
+        /* Floating Elements Background */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp 5s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        /* Header & Navigation */
+        header {
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        h1 {
+            color: var(--primary-pink);
+            font-size: 2.8rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 0px white, 4px 4px 0px rgba(255, 117, 151, 0.2);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav button {
+            background-color: white;
+            border: 3px dashed var(--secondary-pink);
+            color: var(--primary-pink);
+            padding: 12px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0px var(--secondary-pink);
+        }
+
+        nav button.active, nav button:hover {
+            background-color: var(--primary-pink);
+            color: white;
+            border: 3px solid var(--primary-pink);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 0px #d64f71;
+        }
+
+        /* Main Glassmorphism Container */
+        .container {
+            width: 90%;
+            max-width: 550px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 30px;
+            border: 4px solid white;
+            box-shadow: 0 15px 30px rgba(255, 117, 151, 0.1);
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .page {
+            display: none;
+            animation: popIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Countdown Style */
+        .countdown-box {
+            background: var(--soft-bg);
+            border-radius: 15px;
+            padding: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            border: 2px dotted var(--primary-pink);
+            color: var(--primary-pink);
+        }
+
+        /* Memory Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .memory-card {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            border-left: 6px solid var(--primary-pink);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transition: 0.3s;
+        }
+
+        .memory-card:hover {
+            transform: translateX(5px);
+            background: #fff9fa;
+        }
+
+        /* Runaway Button Game Styles */
+        .game-area {
+            text-align: center;
+            margin-top: 25px;
+            position: relative;
+            min-height: 150px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .choice-btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s;
+        }
+
+        #yesBtn {
+            background-color: #2ec4b6;
+            color: white;
+            box-shadow: 0 4px 0 #1e968b;
+        }
+
+        #noBtn {
+            background-color: #ff595e;
+            color: white;
+            box-shadow: 0 4px 0 #d83a40;
+            position: absolute;
+        }
+
+        /* Music Player Placement */
+        .music-bar {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .cute-img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 4px solid var(--secondary-pink);
+        }
+
+        /* Footer Style */
+        footer {
+            position: absolute;
+            bottom: 15px;
+            text-align: center;
+            width: 100%;
+            font-size: 0.85rem;
+            color: #a38f92;
+            letter-spacing: 0.5px;
+        }
+
+        footer span {
+            color: var(--primary-pink);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <header>
+        <h1>Happy Birthday, My Love! 🌸💖</h1>
+        <p>You make my universe beautiful! ✨</p>
+        
+        <nav>
+            <button class="nav-btn active" onclick="openPage('page1', this)">🌸 Welcome</button>
+            <button class="nav-btn" onclick="openPage('page2', this)">💌 Little Notes</button>
+            <button class="nav-btn" onclick="openPage('page3', this)">🎮 Fun Game</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <div id="page1" class="page active">
+            <img src="C:\Users\Lenovo\OneDrive\Documents\BDAY WISH/Niru don.jpeg" alt="Cute Celebration" class="cute-img">
+            
+            <div class="countdown-box">
+                💖 Celebrating You Today! 🧁
+                <div id="timer" style="font-size: 1.2rem; margin-top: 5px;">00h 00m 00s remaining!</div>
+            </div>
+
+            <p style="text-align: center; line-height: 1.6; font-size: 1.1rem;">
+                Welcome to your own little digital kingdom! Today is entirely yours. I built this secret spot just to show you how completely loved you are. Go ahead and explore the tabs above! 💕
+            </p>
+        </div>
+
+        <div id="page2" class="page">
+            <h3 style="color: var(--primary-pink); text-align: center; font-size: 1.4rem;">💌 Sweet Reminders For You</h3>
+            
+            <div class="card-grid">
+                <div class="memory-card">
+                    <h4>💭 Favorite Memory</h4>
+                    <p style="font-size: 0.95rem; margin-top: 5px; color: #666;">The moment we danced in college program in front of whole college. It was the best and favroite moment for me.</p>
+                </div>
+                <div class="memory-card">
+                    <h4>🧸 Cute Habit</h4>
+                    <p style="font-size: 0.95rem; margin-top: 5px; color: #666;">The adorable little facial expression you make whenever you are focused or excited. It's my absolute favorite.</p>
+                </div>
+                <div class="memory-card">
+                    <h4>🌟 My Wish For You</h4>
+                    <p style="font-size: 0.95rem; margin-top: 5px; color: #666;">That this year brings you infinite smiles, zero stress, and all the success in the world. I'll be right here cheering you on!</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="page3" class="page">
+            <h3 style="color: var(--primary-pink); text-align: center; font-size: 1.3rem;">Quick Question! 👇</h3>
+            
+            <div class="game-area">
+                <p id="gameQuestion" style="font-size: 1.2rem; font-weight: bold;">Will you let me treat you to your dream date tonight? 👀</p>
+                
+                <div class="btn-container" id="btnContainer">
+                    <button class="choice-btn" id="yesBtn" onclick="clickedYes()">YES! 💖</button>
+                    <button class="choice-btn" id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">No 😢</button>
+                </div>
+                
+                <div id="happyResult" style="display:none; margin-top: 30px; animation: popIn 0.4s ease;">
+                    <p style="font-size: 1.3rem; color: #2ec4b6; font-weight: bold;">YAYYY! 🥰🎉</p>
+                    <p style="margin-top: 5px;">Get ready, dress cute, and leave the plans to me! You're stuck with me! 🎟️✨</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="music-bar">
+            💡 <i>Tip: Send me a screenshot when you finish the tab game!</i>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Made with <span>💖</span> for the Best Girlfriend Ever</p>
+    </footer>
+
+    <script>
+        // Tab system
+        function openPage(pageId, button) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            button.classList.add('active');
+            
+            // Reposition "No" button smoothly if switching pages
+            if(pageId === 'page3') {
+                resetNoButton();
+            }
+        }
+
+        // Floating hearts background
+        function createHeart() {
+            const container = document.getElementById('heartsBg');
+            const element = document.createElement('div');
+            element.classList.add('heart');
+            
+            const icons = ['🌸', '💖', '✨', '🍬', '🧸', '🐰'];
+            element.innerText = icons[Math.floor(Math.random() * icons.length)];
+            
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            element.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            
+            container.appendChild(element);
+            setTimeout(() => element.remove(), 5000);
+        }
+        setInterval(createHeart, 350);
+
+        // Simple Countdown logic (Counting down till the end of today)
+        function updateTimer() {
+            const now = new Date();
+            const endOfToday = new Date();
+            endOfToday.setHours(23, 59, 59, 999);
+            
+            const diff = endOfToday - now;
+            
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            
+            document.getElementById('timer').innerText = 
+                `${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s left of your day!`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Runaway Button Logic
+        const noBtn = document.getElementById('noBtn');
+        const container = document.getElementById('btnContainer');
+
+        function moveNoButton() {
+            const maxX = container.clientWidth - noBtn.clientWidth - 20;
+            const maxY = 100; 
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY) - 40; 
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function resetNoButton() {
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = '60%';
+            noBtn.style.top = '0px';
+        }
+
+        function clickedYes() {
+            document.getElementById('happyResult').style.display = 'block';
+            noBtn.style.display = 'none';
+            document.getElementById('yesBtn').disabled = true;
+            
+            for(let i=0; i<25; i++) {
+                setTimeout(createHeart, i * 80);
+            }
+        }
+    </script>
+</body>
+</html>
